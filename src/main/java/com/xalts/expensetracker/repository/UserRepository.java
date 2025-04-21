@@ -1,4 +1,4 @@
-package com.xalts.expensetracker.respository;
+package com.xalts.expensetracker.repository;
 
 import com.xalts.expensetracker.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

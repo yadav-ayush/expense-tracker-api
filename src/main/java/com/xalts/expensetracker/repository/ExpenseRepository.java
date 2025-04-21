@@ -1,4 +1,4 @@
-package com.xalts.expensetracker.respository;
+package com.xalts.expensetracker.repository;
 
 import com.xalts.expensetracker.entity.Expense;
 import com.xalts.expensetracker.entity.User;

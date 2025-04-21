@@ -1,5 +1,6 @@
 package com.xalts.expensetracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
 import lombok.*;
 
