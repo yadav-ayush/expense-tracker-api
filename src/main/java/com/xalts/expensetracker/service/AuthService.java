@@ -1,5 +1,6 @@
 package com.xalts.expensetracker.service;
 
+import com.xalts.expensetracker.security.JwtService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.xalts.expensetracker.dto.JwtResponse;
 import com.xalts.expensetracker.dto.LoginRequest;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final JwtService jwtService;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -33,8 +35,8 @@ public class AuthService {
 
         userRepository.save(user);
 
-        // We'll generate JWT later, for now return dummy
-        return new JwtResponse("dummy-token-registered");
+        String token = jwtService.generateToken(user.getEmail());
+        return new JwtResponse(token);
     }
 
     public JwtResponse login(LoginRequest request) {
@@ -45,6 +47,7 @@ public class AuthService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        return new JwtResponse("dummy-token-logged-in");
+        String token = jwtService.generateToken(user.getEmail());
+        return new JwtResponse(token);
     }
 }
