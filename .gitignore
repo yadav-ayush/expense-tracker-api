@@ -1,0 +1,27 @@
+# Java
+*.class
+*.log
+
+# Maven
+target/
+dependency-reduced-pom.xml
+buildNumber.properties
+release.properties
+
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# H2 DB files
+*.mv.db
