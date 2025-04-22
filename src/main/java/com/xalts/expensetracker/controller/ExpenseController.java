@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/expenses")
@@ -42,4 +43,32 @@ public class ExpenseController {
         expenseService.deleteExpense(id, principal);
         return ResponseEntity.ok("Deleted successfully");
     }
+
+    @GetMapping("/total")
+    public ResponseEntity<Double> getTotalByDate(
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end,
+            Principal principal
+    ) {
+        return ResponseEntity.ok(expenseService.getTotalExpenseForDateRange(start, end, principal));
+    }
+
+    @GetMapping("/category-breakdown")
+    public ResponseEntity<Map<String, Double>> getCategoryBreakdown(
+            @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
+            @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end,
+            Principal principal
+    ) {
+        return ResponseEntity.ok(expenseService.getCategoryWiseBreakdown(start, end, principal));
+    }
+
+    @GetMapping("/monthly-report")
+    public ResponseEntity<Map<String, Object>> getMonthlyReport(
+            @RequestParam("year") int year,
+            @RequestParam("month") int month,
+            Principal principal
+    ) {
+        return ResponseEntity.ok(expenseService.getMonthlyReport(year, month, principal));
+    }
+
 }
